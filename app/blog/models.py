@@ -21,6 +21,7 @@ from wagtailmetadata.models import MetadataPageMixin
 
 # Create your models here.
 class BlogTagIndexPage(MetadataPageMixin, Page):
+    parent_page_types = ['home.HomePage']
 
     def get_context(self, request):
 
@@ -40,6 +41,8 @@ class BlogIndexPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
     ]
+    parent_page_types = ['home.HomePage']
+
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
@@ -47,9 +50,13 @@ class BlogIndexPage(MetadataPageMixin, Page):
         context['blogpages'] = blogpages
         return context
 
+    class Meta:
+        verbose_name = "Blog page"
+
 
 class BlogPageTag(TaggedItemBase):
-    content_object = ParentalKey('BlogPage', on_delete=models.CASCADE, related_name='tagged_items')
+    content_object = ParentalKey(
+        'BlogPage', on_delete=models.CASCADE, related_name='tagged_items')
 
 
 class BlogPage(MetadataPageMixin, Page):
@@ -84,6 +91,7 @@ class BlogPage(MetadataPageMixin, Page):
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
         ], heading='Blog information'),
     ]
+    parent_page_types = ['home.HomePage']
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -94,7 +102,8 @@ class BlogPage(MetadataPageMixin, Page):
 
 
 class BlogPageGalleryImage(Orderable):
-    page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='gallery_images')
+    page = ParentalKey(BlogPage, on_delete=models.CASCADE,
+                       related_name='gallery_images')
     image = models.ForeignKey(
         'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
     )
@@ -104,6 +113,7 @@ class BlogPageGalleryImage(Orderable):
         ImageChooserPanel('image'),
         FieldPanel('caption'),
     ]
+
 
 @register_snippet
 class BlogCategory(models.Model):

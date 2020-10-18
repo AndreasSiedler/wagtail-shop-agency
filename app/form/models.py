@@ -11,14 +11,15 @@ from wagtailmetadata.models import MetadataPageMixin
 
 
 class FormField(AbstractFormField):
-    page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
+    page = ParentalKey('FormPage', on_delete=models.CASCADE,
+                       related_name='form_fields')
 
 
 class FormPage(MetadataPageMixin, AbstractEmailForm):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
     button_text = models.CharField(max_length=50, default='Anfrage senden')
-
+    parent_page_types = ['home.HomePage']
     content_panels = AbstractEmailForm.content_panels + [
         FieldPanel('intro', classname="full"),
         InlinePanel('form_fields', label="Form fields"),

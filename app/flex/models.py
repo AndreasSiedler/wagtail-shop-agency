@@ -14,7 +14,11 @@ from .blocks import (PageHeadingSectionBlock, HeroSectionBlock, LogoCloudBlock, 
 # Create your models here.
 
 
-class FlexPage(MetadataPageMixin, Page):
+class FlexPage(Page):
+    """
+    Abstract Page Extension
+    Define abstract to dont create own database table for this model - fields are created in the child class
+    """
     content = StreamField(
         [
             ('page_heading_section_block', PageHeadingSectionBlock()),
@@ -34,6 +38,7 @@ class FlexPage(MetadataPageMixin, Page):
         StreamFieldPanel("content"),
     ]
 
+    template = "flex/flex_page.html"
+
     class Meta:
-        """ Meta data """
-        verbose_name = 'Flex Page'
+        abstract = True
