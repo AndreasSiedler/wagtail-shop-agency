@@ -1,0 +1,27 @@
+version: '3'
+
+volumes:
+  db:
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: docker/prod/python/Dockerfile
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.production
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - /statics/wagtail-agency-personal/static_files:/app/static
+      - /statics/wagtail-agency-personal/media_files:/app/media
+      - db:/app/db
+      - ./app:/app
+    command: gunicorn -w 4 core.wsgi -b 0.0.0.0:8000
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/prod/nginx/configs:/etc/nginx/conf.d
+      - /statics/wagtail-agency-personal/static_files:/statics/wagtail-agency-personal/static_files/
+      - /statics/wagtail-agency-personal/media_files:/statics/wagtail-agency-personal/media_files/
