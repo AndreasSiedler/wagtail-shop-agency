@@ -3,12 +3,9 @@
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
-from wagtail.core.blocks import ListBlock
-
-from wagtailmetadata.models import MetadataPageMixin
 
 from .blocks import (PageHeadingSectionBlock, HeroSectionBlock, LogoCloudBlock, ServiceSectionBlock,
-                     FeatureSectionBlock, CounterSectionBlock, CTASection, PricingSectionBlock)
+                     FeatureSectionBlock, CounterSectionBlock, CTASection, PricingSectionBlock, ContentSectionBlock)
 
 
 # Create your models here.
@@ -29,6 +26,7 @@ class FlexPage(Page):
             ('counter_section_block', CounterSectionBlock()),
             ('cta_section_block', CTASection()),
             ('pricing_section_block', PricingSectionBlock()),
+            ('content_section_block', ContentSectionBlock()),
         ],
         null=True,
         blank=True,

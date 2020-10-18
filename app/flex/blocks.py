@@ -1,16 +1,16 @@
 """ All blocks """
-from wagtail.core.blocks import StructBlock, CharBlock, TextBlock, ListBlock, RawHTMLBlock, IntegerBlock, BooleanBlock
+from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
 
 # Heading Section
-class PageHeadingSectionBlock(StructBlock):
+class PageHeadingSectionBlock(blocks.StructBlock):
     """ Section Base Block - Ued by each section """
-    heading = CharBlock(
+    heading = blocks.CharBlock(
         required=False,
         max_length=80,
         label='Heading',
-        default='Super Awesome Sect',
+        default='Super Awesome Section',
     )
 
     class Meta:
@@ -19,29 +19,51 @@ class PageHeadingSectionBlock(StructBlock):
         label = 'Page Heading Section'
 
 
-# Hero Section Block
-
-class HeroSectionBlock(StructBlock):
+# Content Seciton Block
+class ContentSectionBlock(blocks.StructBlock):
     """ Section Base Block - Ued by each section """
-    heading = CharBlock(
+    layout = blocks.ChoiceBlock(
+        choices=(
+            ('centered', 'Centered'),
+            ('two_columns_with_image', 'Two columns with image')
+        )
+    )
+    content = blocks.RichTextBlock(
+        required=False,
+        max_length=10000,
+        label='Content',
+        default='The thing we do is better than any other similar thing and this hero panel will convince you of that, just by having a glorious background image.',
+    )
+    image = ImageChooserBlock(required=False)
+
+    class Meta:
+        """ Meta data """
+        template = 'blocks/content_section.html'
+        label = 'Content Section'
+
+
+# Hero Section Block
+class HeroSectionBlock(blocks.StructBlock):
+    """ Section Base Block - Ued by each section """
+    heading = blocks.CharBlock(
         required=False,
         max_length=80,
         label='Feature',
         default='Super Awesome Feature',
     )
-    subheading = CharBlock(
+    subheading = blocks.CharBlock(
         required=False,
         max_length=100,
         label='Subheading',
         default='Super Awesome Hero Subheading',
     )
-    description = TextBlock(
+    description = blocks.TextBlock(
         required=False,
         max_length=400,
         label='Description',
         default='The thing we do is better than any other similar thing and this hero panel will convince you of that, just by having a glorious background image.',
     )
-    button = CharBlock(
+    button = blocks.CharBlock(
         required=False,
         max_length=20,
         label='Button text',
@@ -60,11 +82,11 @@ class HeroSectionBlock(StructBlock):
 
 # Logo Cloud Blocks
 
-class LogoCloudBlock(StructBlock):
+class LogoCloudBlock(blocks.StructBlock):
     """ LogoCloud Block """
-    logos = ListBlock(
-        StructBlock([
-            ("image", ImageChooserBlock(required=True)),
+    logos = blocks.ListBlock(
+        blocks.StructBlock([
+            ("image", ImageChooserBlock(required=True, label="Image")),
         ])
     )
 
@@ -76,14 +98,14 @@ class LogoCloudBlock(StructBlock):
 
 # Service Section Block
 
-class ServiceSectionBlock(StructBlock):
+class ServiceSectionBlock(blocks.StructBlock):
     """ Service Section Block """
-    heading = CharBlock(required=True, max_length=100, label="Title")
-    services = ListBlock(
-        StructBlock([
-            ("logo", RawHTMLBlock(required=True)),
-            ("heading", CharBlock(required=True, max_length=100)),
-            ("description", TextBlock(required=True, max_length=300)),
+    heading = blocks.CharBlock(required=True, max_length=100, label="Title")
+    services = blocks.ListBlock(
+        blocks.StructBlock([
+            ("logo", blocks.RawHTMLBlock(required=True)),
+            ("heading", blocks.CharBlock(required=True, max_length=100)),
+            ("description", blocks.TextBlock(required=True, max_length=300)),
         ])
     )
 
@@ -95,14 +117,14 @@ class ServiceSectionBlock(StructBlock):
 
 # Feature Section Block
 
-class FeatureSectionBlock(StructBlock):
+class FeatureSectionBlock(blocks.StructBlock):
     """ Feature Section Block """
-    heading = CharBlock(required=True, max_length=100, label="Title")
-    features = ListBlock(
-        StructBlock([
-            ("icon", RawHTMLBlock(required=True, rows=5)),
-            ("heading", CharBlock(required=True, max_length=100)),
-            ("description", TextBlock(required=True, max_length=300)),
+    heading = blocks.CharBlock(required=True, max_length=100, label="Title")
+    features = blocks.ListBlock(
+        blocks.StructBlock([
+            ("icon", blocks.RawHTMLBlock(required=True, rows=5)),
+            ("heading", blocks.CharBlock(required=True, max_length=100)),
+            ("description", blocks.TextBlock(required=True, max_length=300)),
         ])
     )
 
@@ -114,13 +136,13 @@ class FeatureSectionBlock(StructBlock):
 # Counter Section Block
 
 
-class CounterSectionBlock(StructBlock):
+class CounterSectionBlock(blocks.StructBlock):
     """ Counter Section Block """
-    heading = CharBlock(required=True, max_length=100, label="Title")
-    counters = ListBlock(
-        StructBlock([
-            ("heading", TextBlock(required=True, max_length=300)),
-            ("count", IntegerBlock(required=True, max_value=1000000, )),
+    heading = blocks.CharBlock(required=True, max_length=100, label="Title")
+    counters = blocks.ListBlock(
+        blocks.StructBlock([
+            ("heading", blocks.TextBlock(required=True, max_length=300)),
+            ("count", blocks.IntegerBlock(required=True, max_value=1000000, )),
         ])
     )
 
@@ -131,21 +153,21 @@ class CounterSectionBlock(StructBlock):
 
 
 # CTA Section
-class CTASection(StructBlock):
+class CTASection(blocks.StructBlock):
     """ CTA Section Block """
-    heading = CharBlock(
+    heading = blocks.CharBlock(
         required=False,
         max_length=80,
         label='Heading',
         default='Super Awesome Product',
     )
-    description = TextBlock(
+    description = blocks.TextBlock(
         required=False,
         max_length=400,
         label='Description',
         default='The thing we do is better than any other similar thing and this hero panel will convince you of that, just by having a glorious background image.',
     )
-    button = CharBlock(
+    button = blocks.CharBlock(
         required=False,
         max_length=20,
         label='Button text',
@@ -159,15 +181,15 @@ class CTASection(StructBlock):
 
 
 # Pricing Section
-class PricingSectionBlock(StructBlock):
+class PricingSectionBlock(blocks.StructBlock):
     """ Pricing Section Block """
-    heading = CharBlock(required=True, max_length=100, label="Title")
-    pricings = ListBlock(
-        StructBlock([
-            ("heading", TextBlock(required=True, max_length=300)),
-            ("price", IntegerBlock(required=True, max_value=100000)),
-            ("storage", IntegerBlock(required=True, max_value=100000)),
-            ("hosting", BooleanBlock(required=False)),
+    heading = blocks.CharBlock(required=True, max_length=100, label="Title")
+    pricings = blocks.ListBlock(
+        blocks.StructBlock([
+            ("heading", blocks.TextBlock(required=True, max_length=300)),
+            ("price", blocks.IntegerBlock(required=True, max_value=100000)),
+            ("storage", blocks.IntegerBlock(required=True, max_value=100000)),
+            ("hosting", blocks.BooleanBlock(required=False)),
         ])
     )
 
