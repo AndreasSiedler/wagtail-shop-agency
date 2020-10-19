@@ -1,11 +1,12 @@
 """ Flex Page """
 
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.edit_handlers import StreamFieldPanel, RichTextFieldPanel
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
+from wagtail.core.blocks import RichTextBlock
 
 from .blocks import (PageHeadingSectionBlock, HeroSectionBlock, LogoCloudBlock, ServiceSectionBlock,
-                     FeatureSectionBlock, CounterSectionBlock, CTASection, PricingSectionBlock, ContentSectionBlock)
+                     FeatureSectionBlock, CounterSectionBlock, CTASection, PricingSectionBlock, ContentSectionBlock, TestimonialSectionBlock)
 
 
 # Create your models here.
@@ -16,6 +17,7 @@ class FlexPage(Page):
     Abstract Page Extension
     Define abstract to dont create own database table for this model - fields are created in the child class
     """
+    seo_text = RichTextBlock(required=False, label='SEO Text')
     content = StreamField(
         [
             ('page_heading_section_block', PageHeadingSectionBlock()),
@@ -27,6 +29,7 @@ class FlexPage(Page):
             ('cta_section_block', CTASection()),
             ('pricing_section_block', PricingSectionBlock()),
             ('content_section_block', ContentSectionBlock()),
+            ('testimonial_section_block', TestimonialSectionBlock()),
         ],
         null=True,
         blank=True,

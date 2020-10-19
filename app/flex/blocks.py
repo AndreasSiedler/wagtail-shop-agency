@@ -28,6 +28,12 @@ class ContentSectionBlock(blocks.StructBlock):
             ('two_columns_with_image', 'Two columns with image')
         )
     )
+    heading = blocks.CharBlock(
+        required=False,
+        max_length=80,
+        label='Heading',
+        default='Super Awesome Section',
+    )
     content = blocks.RichTextBlock(
         required=False,
         max_length=10000,
@@ -78,6 +84,42 @@ class HeroSectionBlock(blocks.StructBlock):
         """ Meta data """
         template = 'blocks/hero_section.html'
         label = 'Hero Section'
+
+
+# Testimonial Section Block
+class TestimonialSectionBlock(blocks.StructBlock):
+    """ Testimonial Section Block  """
+    heading = blocks.CharBlock(
+        required=False,
+        max_length=80,
+        label='Feature',
+        default='Super Awesome Feature',
+    )
+    subheading = blocks.CharBlock(
+        required=False,
+        max_length=100,
+        label='Subheading',
+        default='Super Awesome Hero Subheading',
+    )
+    description = blocks.TextBlock(
+        required=False,
+        max_length=400,
+        label='Description',
+        default='The thing we do is better than any other similar thing and this hero panel will convince you of that, just by having a glorious background image.',
+    )
+    testimonials = blocks.ListBlock(
+        blocks.StructBlock([
+            ("image", ImageChooserBlock(required=True, label="Image")),
+            ("name", blocks.CharBlock(required=True, max_length=100)),
+            ("category", blocks.CharBlock(required=True, max_length=100)),
+            ("content", blocks.TextBlock(required=True, max_length=300)),
+        ])
+    )
+
+    class Meta:
+        """ Meta data """
+        template = 'blocks/testimonial_section.html'
+        label = 'Testimonial Section'
 
 
 # Logo Cloud Blocks
@@ -155,6 +197,14 @@ class CounterSectionBlock(blocks.StructBlock):
 # CTA Section
 class CTASection(blocks.StructBlock):
     """ CTA Section Block """
+    layout = blocks.ChoiceBlock(
+        choices=(
+            ('option-1', 'Option 1'),
+            ('option-2', 'Option 2'),
+        ),
+        required=True,
+        default='option-1',
+    )
     heading = blocks.CharBlock(
         required=False,
         max_length=80,
@@ -173,6 +223,7 @@ class CTASection(blocks.StructBlock):
         label='Button text',
         default='Get in touch',
     )
+    button_link = blocks.URLBlock(required=False, label='Button Link')
 
     class Meta:
         """ meta data """

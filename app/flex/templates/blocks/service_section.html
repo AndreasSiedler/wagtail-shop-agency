@@ -7,12 +7,12 @@
         </div>
         <div class="row">
             {% for service in self.services %}
-            <div class="col-lg-4 col-md-6 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-flex">
+            <div class="col-lg-4 col-md-6 align-self-stretch ftco-animate">
+                <div class="media block-6 services p-3">
                     <div class="icon d-flex align-items-center justify-content-center">
                         {{ service.logo }}
                     </div>
-                    <div class="media-body pl-4">
+                    <div class="media-body text-center pt-4">
                         <h3 class="heading">{{ service.heading }}</h3>
                         <p class="mb-0">{{ service.description }}</p>
                     </div>
