@@ -71,9 +71,13 @@ class HeroSectionBlock(blocks.StructBlock):
     )
     button = blocks.CharBlock(
         required=False,
-        max_length=20,
+        max_length=100,
         label='Button text',
         default='Get in touch',
+    )
+    button_link = blocks.URLBlock(
+        required=False,
+        label='Button link'
     )
     image = ImageChooserBlock(
         required=False,
@@ -109,9 +113,9 @@ class TestimonialSectionBlock(blocks.StructBlock):
     )
     testimonials = blocks.ListBlock(
         blocks.StructBlock([
-            ("image", ImageChooserBlock(required=True, label="Image")),
-            ("name", blocks.CharBlock(required=True, max_length=100)),
-            ("category", blocks.CharBlock(required=True, max_length=100)),
+            ("image", ImageChooserBlock(required=False, label="Image")),
+            ("name", blocks.CharBlock(required=False, max_length=100)),
+            ("category", blocks.CharBlock(required=False, max_length=100)),
             ("content", blocks.TextBlock(required=True, max_length=300)),
         ])
     )

@@ -8283,7 +8283,7 @@ h1, h2, h3, h4, h5,
       color: #3f52e3 !important; }
     .ftco-navbar-light.scrolled .nav-item.cta > a {
       color: #fff !important;
-      background: #3f52e3;
+      background: #21bf73;
       border: none !important;
       padding-top: 0.5rem !important;
       padding-bottom: .5rem !important;
@@ -8536,8 +8536,8 @@ h1, h2, h3, h4, h5,
         background: #21bf73;
         color: #fff; }
   .btn.btn-tertiary {
-    background: #ff8ba7;
-    border: 1px solid #ff8ba7;
+    background: #21bf73;
+    border: 1px solid #21bf73;
     color: #fff; }
     .btn.btn-tertiary:hover {
       border: 1px solid #ff7294;
@@ -8701,8 +8701,7 @@ h1, h2, h3, h4, h5,
     width: 80px;
     height: 80px;
     margin: 0 auto;
-    background: #21bf73;
-    background-image: -webkit-linear-gradient(0deg, #f61daf 0%, #691cff 100%);
+    background: #f61daf;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
@@ -9111,6 +9110,7 @@ textarea.form-control {
   background-position: center center; }
 
 .testimony-section {
+  background-color: whitesmoke;
   position: relative; }
   .testimony-section .owl-carousel {
     margin: 0; }

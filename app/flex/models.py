@@ -2,8 +2,7 @@
 
 from wagtail.admin.edit_handlers import StreamFieldPanel, RichTextFieldPanel
 from wagtail.core.models import Page
-from wagtail.core.fields import StreamField
-from wagtail.core.blocks import RichTextBlock
+from wagtail.core.fields import StreamField, RichTextField
 
 from .blocks import (PageHeadingSectionBlock, HeroSectionBlock, LogoCloudBlock, ServiceSectionBlock,
                      FeatureSectionBlock, CounterSectionBlock, CTASection, PricingSectionBlock, ContentSectionBlock, TestimonialSectionBlock)
@@ -17,7 +16,7 @@ class FlexPage(Page):
     Abstract Page Extension
     Define abstract to dont create own database table for this model - fields are created in the child class
     """
-    seo_text = RichTextBlock(required=False, label='SEO Text')
+    seo_text = RichTextField(blank=True, null=True, verbose_name="SEO Text",)
     content = StreamField(
         [
             ('page_heading_section_block', PageHeadingSectionBlock()),
@@ -36,6 +35,7 @@ class FlexPage(Page):
     )
 
     content_panels = Page.content_panels + [
+        RichTextFieldPanel("seo_text"),
         StreamFieldPanel("content"),
     ]
 
