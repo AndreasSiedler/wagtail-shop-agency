@@ -21,6 +21,7 @@ services:
     image: nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./docker/prod/nginx/letsencrypt:/etc/letsencrypt
       - ./docker/prod/nginx/configs:/etc/nginx/conf.d
