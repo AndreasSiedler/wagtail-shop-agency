@@ -8280,7 +8280,7 @@ h1, h2, h3, h4, h5,
         padding-right: 0 !important;
         padding-bottom: 0 !important; } }
     .ftco-navbar-light.scrolled .nav-item.active > a {
-      color: #3f52e3 !important; }
+      color: #21bf73 !important; }
     .ftco-navbar-light.scrolled .nav-item.cta > a {
       color: #fff !important;
       background: #21bf73;
@@ -8701,7 +8701,7 @@ h1, h2, h3, h4, h5,
     width: 80px;
     height: 80px;
     margin: 0 auto;
-    background: #f61daf;
+    background: #21bf73;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
     -webkit-transition: all 0.3s ease;
@@ -9323,20 +9323,52 @@ textarea.form-control {
     color: #000;
     font-size: 14px; }
 
-.blog-entry .meta {
+.portfolio-entry .meta {
   width: 100px;
   text-align: right; }
-  .blog-entry .meta > div {
+  .portfolio-entry .meta > div {
     display: block;
     margin-right: 5px;
     margin-bottom: 0px;
     font-size: 15px; }
-    .blog-entry .meta > div a {
+    .portfolio-entry .meta > div a {
       color: #b3b3b3;
       font-size: 13px; }
-      .blog-entry .meta > div a:hover {
+      .portfolio-entry .meta > div a:hover {
         color: #cccccc; }
 
+        .portfolio-entry .text {
+          position: relative;
+          border-top: 0;
+          border-radius: 2px; }
+          .portfolio-entry .text .heading {
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 600; }
+            .portfolio-entry .text .heading a {
+              color: #000; }
+              .portfolio-entry .text .heading a:hover, .portfolio-entry .text .heading a:focus, .portfolio-entry .text .heading a:active {
+                color: #3f52e3; }
+          .portfolio-entry .text .meta-chat {
+            color: #b3b3b3; }
+          .portfolio-entry .text .read {
+            color: #000;
+            font-size: 14px; }
+        
+        .portfolio-entry .meta {
+          width: 100px;
+          text-align: right; }
+          .portfolio-entry .meta > div {
+            display: block;
+            margin-right: 5px;
+            margin-bottom: 0px;
+            font-size: 15px; }
+            .portfolio-entry .meta > div a {
+              color: #b3b3b3;
+              font-size: 13px; }
+              .portfolio-entry .meta > div a:hover {
+                color: #cccccc; }
+        
 .block-23 ul {
   padding: 0; }
   .block-23 ul li, .block-23 ul li > a {
@@ -9391,7 +9423,7 @@ textarea.form-control {
 
 .block-7 {
   padding: 30px;
-  background: #fff;
+  background: whitesmoke;
   position: relative;
   z-index: 0; }
   .block-7:after {
@@ -9417,6 +9449,8 @@ textarea.form-control {
     font-size: 16px;
     font-weight: 600;
     color: #72789a; }
+  .block-7 .check-icon {
+      width: 30px; }
   .block-7 .heading-2 {
     font-size: 14px;
     font-weight: normal;

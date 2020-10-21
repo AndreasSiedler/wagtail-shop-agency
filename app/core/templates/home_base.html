@@ -47,7 +47,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
-                    {% main_menu max_levels=3 template="menus/custom_main_menu.html" sub_menu_template="menus/custom_sub_menu.html" %}
+                {% main_menu max_levels=3 template="menus/custom_main_menu.html" sub_menu_template="menus/custom_sub_menu.html" %}
             </div>
         </div>
     </nav>
@@ -80,10 +80,11 @@
                 </div>
                 <div class="col-md">
                     {% flat_menu 'useful_links' max_levels=1 show_menu_heading=True fall_back_to_default_site_menus=True %}
-
                 </div>
                 <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
+                    {% flat_menu 'legal_links' max_levels=1 show_menu_heading=True fall_back_to_default_site_menus=True %}
+
+                    <!-- <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Navigational</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">Join Us</a></li>
@@ -91,16 +92,21 @@
                             <li><a href="#" class="py-2 d-block">Privacy &amp; Policy</a></li>
                             <li><a href="#" class="py-2 d-block">Terms &amp; Condition</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">Office</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="mr-3 fa fa-map-marker"></span><span class="text">{{ settings.theme.ThemeSettings.about_address }}</span></li>
-                                <li><a href="tel:{{ settings.theme.ThemeSettings.about_phone }}"><span class="mr-3 fa fa-phone"></span><span class="text">{{ settings.theme.ThemeSettings.about_phone }}</span></a></li>
-                                <li><a href="mail:{{ settings.theme.ThemeSettings.about_email }}"><span class="mr-3 fa fa-envelope"></span><span class="text">{{ settings.theme.ThemeSettings.about_email }}</span></a></li>
+                                <li><span class="mr-3 fa fa-map-marker"></span><span
+                                        class="text">{{ settings.theme.ThemeSettings.about_address }}</span></li>
+                                <li><a href="tel:{{ settings.theme.ThemeSettings.about_phone }}"><span
+                                            class="mr-3 fa fa-phone"></span><span
+                                            class="text">{{ settings.theme.ThemeSettings.about_phone }}</span></a></li>
+                                <li><a href="mail:{{ settings.theme.ThemeSettings.about_email }}"><span
+                                            class="mr-3 fa fa-envelope"></span><span
+                                            class="text">{{ settings.theme.ThemeSettings.about_email }}</span></a></li>
                             </ul>
                         </div>
                     </div>

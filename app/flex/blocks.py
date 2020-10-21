@@ -238,13 +238,32 @@ class CTASection(blocks.StructBlock):
 # Pricing Section
 class PricingSectionBlock(blocks.StructBlock):
     """ Pricing Section Block """
-    heading = blocks.CharBlock(required=True, max_length=100, label="Title")
+    custom_classes = blocks.CharBlock(
+        required=False, max_length=100, label="Classes")
+    heading = blocks.CharBlock(required=False, max_length=100, label="Heading")
     pricings = blocks.ListBlock(
         blocks.StructBlock([
-            ("heading", blocks.TextBlock(required=True, max_length=300)),
-            ("price", blocks.IntegerBlock(required=True, max_value=100000)),
-            ("storage", blocks.IntegerBlock(required=True, max_value=100000)),
-            ("hosting", blocks.BooleanBlock(required=False)),
+            ("heading", blocks.CharBlock(required=True, max_length=100)),
+            ("price", blocks.CharBlock(required=True, max_length=100)),
+            ("type", blocks.ChoiceBlock(required=True, choices=(
+                ('monthly', 'Monthly'),
+                ('unique', 'Unique')
+            ))),
+            ("features", blocks.ListBlock(
+                blocks.StructBlock([
+                    ("description", blocks.CharBlock(
+                        required=True, max_length=100)),
+                    ("available", blocks.BooleanBlock(required=False)),
+                ])),
+             ),
+            # ("plan_price", blocks.CharBlock(required=True, max_length=100)),
+            # ("plan_features", blocks.ListBlock(
+            #     blocks.StructBlock([
+            #         ("description", blocks.CharBlock(
+            #             required=True, max_length=100)),
+            #         ("available", blocks.BooleanBlock(required=False)),
+            #     ])),
+            #  ),
         ])
     )
 
@@ -252,3 +271,37 @@ class PricingSectionBlock(blocks.StructBlock):
         """ meta data """
         template = 'blocks/pricing_section.html'
         label = 'Pricing Section'
+
+
+# Blog Section
+class PortfolioSectionBlock(blocks.StructBlock):
+    """ Blog Section Block """
+    custom_classes = blocks.CharBlock(
+        required=False,
+        max_length=100,
+        label="Classes"
+    )
+    heading = blocks.CharBlock(
+        required=False,
+        max_length=100,
+        label="Heading"
+    )
+    description = blocks.TextBlock(
+        required=False,
+        max_length=400,
+        label='Description',
+        default='The thing we do is better than any other similar thing and this hero panel will convince you of that, just by having a glorious background image.',
+    )
+    projects = blocks.ListBlock(
+        blocks.StructBlock([
+            ("title", blocks.CharBlock(required=True, max_length=100)),
+            ("description", blocks.CharBlock(required=True, max_length=200)),
+            ("image", ImageChooserBlock(required=True, label="Image")),
+            ("link", blocks.URLBlock(required=True, max_length=100)),
+        ])
+    )
+
+    class Meta:
+        """ meta data """
+        template = 'blocks/portfolio_section.html'
+        label = 'Portfolio Section'
