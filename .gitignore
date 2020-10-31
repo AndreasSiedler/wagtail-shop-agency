@@ -3,12 +3,13 @@
 .venv/
 venv
 data/certbot/
-# *.sqlite3
+*.sqlite3
 __pycache__/
 # app/tickets/settings/prod.py
 app/debug.log
 app/media
 app/static
+docker/prod/nginx/letsencrypt
 
 # .env files
 .env
