@@ -10,6 +10,7 @@ app/debug.log
 app/media
 app/static
 docker/prod/nginx/letsencrypt
+python.conf
 
 # .env files
 .env
