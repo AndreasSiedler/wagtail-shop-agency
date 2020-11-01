@@ -3,6 +3,7 @@ from django import forms
 
 # New imports added for ParentalKey, Orderable, InlinePanel, ImageChooserPanel
 
+from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
@@ -13,6 +14,7 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, StreamFieldPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.search import index
 
 from wagtail.snippets.models import register_snippet
@@ -41,7 +43,8 @@ class BlogIndexPage(MetadataPageMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
     ]
-    parent_page_types = ['home.HomePage']
+    subpage_types = ('blog.BlogPage',)
+    parent_page_types = ('home.HomePage',)
 
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
@@ -75,6 +78,7 @@ class BlogPage(MetadataPageMixin, Page):
     ])
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
+    author = ParentalKey('blog.BlogAuthor', blank=True, null=True, on_delete=models.SET_NULL)
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -89,9 +93,10 @@ class BlogPage(MetadataPageMixin, Page):
             FieldPanel('date'),
             FieldPanel('tags'),
             FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+            SnippetChooserPanel('author'),
         ], heading='Blog information'),
     ]
-    parent_page_types = ['home.HomePage']
+    parent_page_types = ['blog.BlogIndexPage']
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -99,6 +104,16 @@ class BlogPage(MetadataPageMixin, Page):
             return gallery_item.image
         else:
             return None
+    
+    def get_context(self, request):
+        context = super().get_context(request)
+        blogpages = BlogPage.objects.live().not_page(self).order_by('-first_published_at')
+        tag_cloud = BlogPageTag.objects.all()
+        context['blogpages'] = blogpages
+        context['tag_cloud'] = tag_cloud
+        return context
+
+
 
 
 class BlogPageGalleryImage(Orderable):
@@ -113,6 +128,26 @@ class BlogPageGalleryImage(Orderable):
         ImageChooserPanel('image'),
         FieldPanel('caption'),
     ]
+
+@register_snippet
+class BlogAuthor(ClusterableModel):
+    name = models.CharField(max_length=255)
+    image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
+    )
+    description = models.TextField(max_length=500)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('description'),
+        ImageChooserPanel('image'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'blog authors'
 
 
 @register_snippet

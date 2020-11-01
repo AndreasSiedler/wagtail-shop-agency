@@ -12,8 +12,8 @@
         <div class="row no-gutters slider-text align-items-end justify-content-start">
             <div class="col-md-8 ftco-animate text-center text-md-left mb-5">
                 <p class="breadcrumbs mb-0"><span class="mr-3"><a href="index.html">Home <i
-                                class="ion-ios-arrow-forward"></i></a></span> <span>Blog</span></p>
-                <h1 class="mb-3 bread">Blog</h1>
+                                class="ion-ios-arrow-forward"></i></a></span> <span>{{ page.title }}</span></p>
+                <h1 class="mb-3 bread">{{ page.title }}</h1>
             </div>
         </div>
     </div>
@@ -22,104 +22,30 @@
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-                    </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">May 17, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Everthing You Need to Know About Cloud Template</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry" data-aos-delay="100">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-                    </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">May 17, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Everthing You Need to Know About Cloud Template</a></h3>
+            {% comment %} {% for post in page.get_children %} {% endcomment %}
+            {% for post in blogpages %}
+                {% with post=post.specific %}
+                {% image post.main_image original as img %}
+                <div class="col-md-4 ftco-animate">
+                    <div class="blog-entry">
+                        <a href="{% pageurl post %}" class="block-20" style="background-image: url('{{ img.url }}');">
+                        </a>
+                        <div class="text d-flex py-4">
+                            <div class="meta mb-3">
+                                <div><a href="#">May 17, 2020</a></div>
+                                <div><a href="#">Admin</a></div>
+                                <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                            </div>
+                            <div class="desc pl-3">
+                                <h3 class="heading"><a href="{% pageurl post %}">{{ post.title }}</a></h3>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry" data-aos-delay="200">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-                    </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">May 17, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Everthing You Need to Know About Cloud Template</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('images/image_4.jpg');">
-                    </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">May 17, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Everthing You Need to Know About Cloud Template</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry" data-aos-delay="100">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('images/image_5.jpg');">
-                    </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">May 17, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Everthing You Need to Know About Cloud Template</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <div class="blog-entry" data-aos-delay="200">
-                    <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');">
-                    </a>
-                    <div class="text d-flex py-4">
-                        <div class="meta mb-3">
-                            <div><a href="#">May 17, 2020</a></div>
-                            <div><a href="#">Admin</a></div>
-                            <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                        </div>
-                        <div class="desc pl-3">
-                            <h3 class="heading"><a href="#">Everthing You Need to Know About Cloud Template</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% endwith %}
+            {% endfor %}
         </div>
-        <div class="row mt-5">
+        <!-- <div class="row mt-5">
             <div class="col text-center">
                 <div class="block-27">
                     <ul>
@@ -133,33 +59,10 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
-<h1>{{ page.title }}</h1>
 
-<div class="intro">{{ page.intro|richtext }}</div>
-
-{% comment %} {% for post in page.get_children %}
-<h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-{{ post.specific.intro }}
-{{ post.specific.body|richtext }}
-{% endfor %} {% endcomment %}
-
-{% comment %} {% for post in page.get_children %} {% endcomment %}
-{% for post in blogpages %}
-{% with post=post.specific %}
-<h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-
-{% with post.main_image as main_image%}
-{% if main_image %}{% image main_image fill-160x100 %}{% endif %}
-{% endwith %}
-
-<p>{{ post.intro }}</p>
-{% comment %} {{ post.body|richtext }} {% endcomment %}
-{% include_block post.body %}
-{% endwith %}
-{% endfor %}
 
 {% endblock %}
